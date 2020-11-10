@@ -1,0 +1,107 @@
+<mat-card>
+  <mat-card-content>
+    <form id="createUserForm"
+      [formGroup]="createUserForm"
+      (ngSubmit)="onSubmit(createUserForm.value)"
+    >
+    <h3>Create User</h3>
+      <mat-form-field class="name">
+      <mat-label>First name</mat-label>
+      <input matInput type="text" formControlName="firstName" required>
+    </mat-form-field>
+   <mat-form-field class="name">
+      <mat-label>Last name</mat-label>
+      <input matInput type="text" formControlName="lastName" required>
+    </mat-form-field>
+
+    <mat-form-field class="email">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required>
+    </mat-form-field>
+
+    <mat-form-field class="password">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" required>
+    </mat-form-field>
+
+    <mat-form-field class="phone">
+      <mat-label>Phone</mat-label>
+      <input matInput type="tel" formControlName="phone" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Select a role</mat-label>
+      <mat-select [(value)]="selected" formControlName="role" required>
+        <mat-option>None</mat-option>
+        <mat-option type="number" [value]="1">Admin</mat-option>
+        <mat-option type="number" [value]="2">Manager</mat-option>
+        <mat-option type="number" [value]="3">Staff</mat-option>
+      </mat-select>
+    </mat-form-field>
+ 
+  
+      <div id="imageUpload" appUpload (fileDropped)="onFileDropped($event)">
+       <div class="upload"> <p>Upload max 3 images</p>
+        
+        <p><label id="uploadLabel" for="fileDropRef"><span class="mat-button-wrapper">
+          <mat-icon>add</mat-icon></span></label></p>
+        
+       </div>
+       <div class="drop">
+      <p>Drag and Drop up to 3 images </p>
+ 
+        <input id="fileDropRef" type="file" #fileDropRef 
+        multiple 
+        (change)="detectFiles($event)"        
+/>     <!-- 
+<input type="file" id="files" multiple (change)="detectFiles($event)">
+-->
+
+      </div>
+
+      </div>
+      <div class="files-list" *ngIf="photos.length">
+      
+        <div class="single-file" 
+        formArrayName="photos" *ngFor="let image of photos.controls; let i = index">
+            
+           <!-- <p class="size">
+              {{ formatBytes(image.controls.file.value) }}
+            </p>--> 
+          <!-- <app-progress [progress]="image.controls.file.value"></app-progress>   -->  
+        
+          <div class="upload-content" [formGroupName]="i">
+            <div class="upload-name">
+            <h3>Name</h3>
+            <p>{{ image.controls.file.value.name }}</p>
+          </div>
+          
+          <div class="upload-image">
+            <img [src]="image.controls.url.value" class="card-img-top" alt="Image Preview">
+          </div>
+          <div class="upload-delete">
+            <button mat-raised-button class="" type="button" (click)="removePhoto(i)">Delete</button>
+          </div>
+          </div>
+
+        </div>
+        <div class="imagesalert" *ngIf="alertvisible">
+          <p>Only 3 images allowed !</p>
+          <p>Delete an image, to upload a new one.</p>
+        </div>
+      </div>
+
+    <button id="userButton" type="submit" color="accent"  mat-raised-button
+class="button" [disabled]="!createUserForm.valid"> <mat-icon class="secondary-text">person</mat-icon>  
+Create user </button>
+ 
+<div class="erroralert" *ngIf="errorvisible">
+  <p>Something happened:  <br />{{ errormessage }} </p>
+</div>
+</form>
+
+  </mat-card-content>
+</mat-card>
+ 
+
+  

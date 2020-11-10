@@ -1,0 +1,46 @@
+<div id="dokumentupload">
+ <div class="clickupload">
+<h3>Upload</h3> 
+<button mat-fab
+        
+class="add-file-button"
+(click)="fileInput.click()"
+aria-label="Add file">
+<mat-icon>add</mat-icon>
+</button>
+</div>
+<div id="drop">
+<div class="dropzone" 
+     dropzone
+     (hovered)="toggleHover($event)"
+     (dropped)="onDrop($event)"
+     [class.hovering]="isHovering">
+
+     <p>Drag and Drop a File <mat-icon>file_copy</mat-icon></p>
+     <div class="file">
+        <label class="file-label">
+
+
+
+<!-- Det er ikke muligt at have "file" som type med mat-input
+        <input mat class="file-input" type="file" (change)="onDrop($event.target.files)"> -->
+
+        <input hidden type="file" #fileInput type="file" (change)="onDrop($event.target.files)" />
+    
+ 
+ 
+        </label>
+      </div>
+</div>
+</div>
+ 
+
+
+</div>
+
+<div class="row">
+
+<div id="files" *ngFor="let file of files">
+  <upload-task [file]="file"></upload-task>
+</div>
+</div>

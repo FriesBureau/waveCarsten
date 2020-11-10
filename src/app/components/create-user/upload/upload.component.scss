@@ -1,0 +1,44 @@
+
+#dokumentupload {
+display: flex;
+flex-flow: row;
+background: beige;
+padding: 1rem 2rem;
+flex-wrap: nowrap;
+
+.clickupload {
+    flex: 50% 0 0;
+    display: flex !important;
+flex-flow: column;
+align-items: center;
+min-height: 130px;
+
+}
+
+#drop  {
+display: flex;
+flex-flow: row;
+border: dotted 1px;
+min-height: 130px;
+flex: 50% 0 0;
+display: flex !important;
+flex-flow: column;
+align-items: center;
+justify-content: center;
+.mat-icon {
+    margin-left: 10px;
+}
+.dropzone  {
+    flex: 50% 0 0;
+ 
+ 
+    p {
+        padding: 1rem;
+    }
+ 
+            }
+        #files {
+            flex: 50% 0 0;
+        }
+    }
+        }

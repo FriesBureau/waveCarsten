@@ -1,0 +1,51 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a href="./" class="nav-link" routerLink="./"> <span>waveCarsten</span> </a>
+   
+    <mat-divider></mat-divider>
+<mat-nav-list id="menu">
+
+  <mat-list-item *ngFor="let item of navigation" >
+    <a [routerLink]="[item.link]" *ngIf="isLoggedIn"
+    routerLinkActive="active">
+     <span id="menutitel">   {{item.label}}</span>
+     <mat-icon id="menuikon">{{item?.icon}}</mat-icon>
+     </a>
+         <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+
+        <mat-list-item *ngIf="isLoggedIn">
+          <a href (click)="logout()">Log Out</a>
+
+        </mat-list-item>
+        <mat-list-item *ngIf="!isLoggedIn">
+
+        <a href="/authentication" class="nav-link" routerLink="authentication">Authentication</a>
+      </mat-list-item>
+
+ 
+</mat-nav-list>
+  </mat-toolbar-row>
+
+ 
+</mat-toolbar>
+
+ 
+ 
+  
+  
+  
+ 
+ 
+        <router-outlet></router-outlet>
+   
+ 
+  
+ 
+  
+
+ 
+
+ 

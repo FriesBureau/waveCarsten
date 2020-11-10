@@ -1,0 +1,29 @@
+
+
+.dokumentlistedownload {
+max-height: 250px;
+}
+
+
+.procentupload  {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .progress  {
+        width: calc(100% - 100px);
+    }
+ 
+}
+.dokumentlistedownload {
+ 
+    width: 100%;
+ 
+ .progressliste {
+     display: flex;
+     justify-content: center;
+ }
+}
+
+h3 {
+    text-align: center;
+}

@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+  }
+
+ 
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+.mat-column-email {
+  cursor: pointer;
+}

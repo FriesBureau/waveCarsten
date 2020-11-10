@@ -1,0 +1,35 @@
+<div class="procentupload" *ngIf="percentage | async as pct">
+
+
+<!-- Virker ikke med procent visning   <mat-progress-bar [value]="pct" max="100"></mat-progress-bar> -->
+ 
+<!-- Oprindelig kode virker med procent -->
+    <progress class="progress is-info" 
+              [value]="pct" 
+              max="100"
+              color="primary">        
+    </progress> 
+  
+    {{ pct | number }}%
+  
+  </div>
+  
+  
+  
+  <div class="dokumentlistedownload" *ngIf="(snapshot | async) as snap">
+
+    <div *ngIf="downloadURL as url">
+      <h3>Upload completed</h3>
+<!--     <img [src]="url"><br>-->  
+
+    </div> 
+    <div class="progressliste">
+  
+    {{ snap.bytesTransferred / 1000 | number:'1.0-0':'da'  }} kb of {{ snap.totalBytes / 1000 |  number:'1.0-0':'da'  }} kb
+  
+  <button mat-button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
+  <button mat-button  (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button >
+  <button mat-button  (click)="task.resume()" class="button is-info"   [disabled]="!(snap?.state === 'paused')">Resume</button >
+</div>
+  <hr>
+</div>

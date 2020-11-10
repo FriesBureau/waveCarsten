@@ -1,0 +1,94 @@
+<mat-card>
+  <mat-card-content>
+    <form  
+    id="updateUserForm"
+      [formGroup]="updateUserForm"
+      (ngSubmit)="onSubmit(updateUserForm.value)"
+    >
+    <h3>Update User</h3>
+      <mat-form-field class="name">
+      <mat-label>First name</mat-label>
+      <input matInput type="text" formControlName="firstName" [readonly]="checkForRole" required>
+    </mat-form-field>
+   <mat-form-field class="name">
+      <mat-label>Last name</mat-label>
+      <input matInput type="text" formControlName="lastName" [readonly]="checkForRole" required>
+    </mat-form-field>
+
+    <mat-form-field class="email">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" [readonly]="checkForRole" >
+    </mat-form-field>
+
+    <mat-form-field class="phone">
+      <mat-label>Phone</mat-label>
+      <input matInput type="tel" formControlName="phone" [readonly]="checkForRole" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select [(value)]="selected" [disabled]="checkForRole" formControlName="role"required>
+        <mat-option>None</mat-option>
+        <mat-option type="number" [value]="1">Admin</mat-option>
+        <mat-option type="number" [value]="2">Manager</mat-option>
+        <mat-option type="number" [value]="3">Staff</mat-option>
+      </mat-select>
+    </mat-form-field>
+ 
+  
+      <div id="imageUpload" appUpload (fileDropped)="onFileDropped($event)" >
+       <div class="upload"> <p>Upload max 3 images</p>
+        
+        <p><label id="uploadLabel" for="fileDropRef"><span class="mat-button-wrapper">
+          <mat-icon>add</mat-icon></span></label></p>
+        
+       </div>
+       <div class="drop">
+      <p>Drag and Drop up to 3 images </p>
+ 
+        <input id="fileDropRef" type="file" #fileDropRef 
+        [readonly]="checkForRole"
+        multiple 
+        (change)="detectFiles($event)"        
+/>    
+      </div>
+
+      </div>
+      <div class="files-list" *ngIf="photos.length">
+        <div class="single-file" 
+        formArrayName="photos" *ngFor="let image of photos.controls; let i = index">
+        
+        
+          <div class="upload-content" [formGroupName]="i">
+            <div class="upload-name">
+            <h3>Name</h3>
+            <p>{{ image.controls.file.value.name }}</p>
+          </div>
+          
+          <div class="upload-image">
+            <img [src]="image.controls.url.value" class="card-img-top" alt="Image Preview">
+          </div>
+          <div class="upload-delete">
+            <button mat-raised-button class="" type="button" (click)="removePhoto(i)">Delete</button>
+          </div>
+          </div>
+
+        </div>
+      </div>
+
+    <button id="userButton" type="submit" color="accent"  mat-raised-button
+class="button" [disabled]="!updateUserForm.valid"> <mat-icon class="secondary-text">person</mat-icon>  
+Create user </button>
+
+ 
+</form>
+
+<button id="deleteButton" (click)="deleteUser()" color="warning"  mat-raised-button
+class="button" [disabled]="checkForRole"> <mat-icon class="secondary-text">delete</mat-icon>  
+Delete user </button>
+
+  </mat-card-content>
+</mat-card>
+ 
+
+  
